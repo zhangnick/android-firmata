@@ -54,7 +54,7 @@ public abstract class BTActivity extends Activity implements OnBTEventListener{
 	
 	
 	protected Arduino arduino;
-	protected String address;
+	protected String lastConnectedAddress;
 
 	
 	/** Called when the activity is first created. */
@@ -64,7 +64,7 @@ public abstract class BTActivity extends Activity implements OnBTEventListener{
         try {
 			btHandler = new BTHandler(this);
 			btHandler.addOnBTEventListener(this);
-			address = PreferenceManager.getDefaultSharedPreferences(this).getString("address", null);
+			lastConnectedAddress = PreferenceManager.getDefaultSharedPreferences(this).getString("address", null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -79,8 +79,7 @@ public abstract class BTActivity extends Activity implements OnBTEventListener{
 		btHandler.close();
     }
 	
-	
-	public boolean connect(){
+	public boolean connectTo(final String address){
 		if (address != null){
 			try {
 				btHandler.connectTo(address);
@@ -105,6 +104,11 @@ public abstract class BTActivity extends Activity implements OnBTEventListener{
 			.show();
 		}
 		return false;
+	}
+	
+	
+	public boolean connect(){
+		return connectTo(lastConnectedAddress);
 	}
 	
 	public void disconnect(){
@@ -182,10 +186,10 @@ public abstract class BTActivity extends Activity implements OnBTEventListener{
 		if (resultCode == Activity.RESULT_OK){
 			switch (requestCode){
 				case SHOW_DISCOVERED_DEVICES:
-					address = data.getStringExtra(DiscoveredDevicesList.ADDRESS_EXTRA);
+					lastConnectedAddress = data.getStringExtra(DiscoveredDevicesList.ADDRESS_EXTRA);
 					// we immediately pair, if device is already paired this will
 					// result in a connect
-					btHandler.pairDevices(address);
+					btHandler.pairDevices(lastConnectedAddress);
 					break;
 				default:
 					break;
@@ -291,12 +295,12 @@ public abstract class BTActivity extends Activity implements OnBTEventListener{
 		hideProgressDialog();
 		
 		try {
-			btHandler.connectTo(address);
+			btHandler.connectTo(lastConnectedAddress);
 			
 			// save last successful connected address
 			PreferenceManager.getDefaultSharedPreferences(this)
 				.edit()
-				.putString("address", address)
+				.putString("address", lastConnectedAddress)
 				.commit();
 			
 			// inform our parent
