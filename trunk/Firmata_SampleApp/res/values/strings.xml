@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, Firmata!</string>
+    <string name="app_name">Firmata</string>
+    <string name="yes">Yes</string>
+	<string name="no">No</string>
+	<string name="ok">Ok</string>
+	<string name="cancel">Cancel</string>
+	<string name="connect">Connect to [%s]</string>
+	<string name="disconnect">Disconnect</string>
+	
+	<string name="menu_scan">Scan for devices</string>
+    
+    <string name="connect_to_device">Do you want to connect to this device?</string>
+	<string name="pin_requested_dialog_msg">Please pull down the notification bar to enter the PIN.\n\nAfter you have entered the PIN you need to restart the Dimmer application.</string>
+	<string name="pin_requested_dialog_title">Pin Request</string>
+	<string name="bluetooth_on_off">Bluetooth On/Off</string>
+	<string name="bluetooth_disabled">Bluetooth has been disabled.</string>
+	<string name="bluetooth_off">Bluetooth is disabled</string>
+	<string name="scanning_devices_progress_dialog_msg">Scanning Bluetooth devices. Please wait...</string>
+	<string name="bluetooth_disable_dialog_msg">Disabling Bluetooth. Please wait...</string>
+	<string name="enabling_bluetooth_progess_dialog_msg">Enabling Bluetooth. Please wait...</string>
+	
+</resources>
