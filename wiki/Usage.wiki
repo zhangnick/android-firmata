@@ -1,5 +1,5 @@
 #labels Phase-Implementation
-=How to setup your Android app to use Firmata=
+=== How to setup your Android app to use Firmata ===
 
 This is an early version of android-firmata. The final result will be a library which you can import to your Android project to use its functions.
 
