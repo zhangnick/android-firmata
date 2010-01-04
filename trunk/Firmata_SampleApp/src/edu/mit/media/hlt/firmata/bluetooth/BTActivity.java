@@ -87,7 +87,7 @@ public abstract class BTActivity extends Activity implements OnBTEventListener{
 				// since we will support different android versions and
 				// standalone as well as amarino based communication
 				arduino = new Arduino_v1(new StandAloneSerial(btHandler));
-				// inform our parent
+				// // time to tell your parent what we did
 				connectionEstablished();
 				return true;
 			} catch (BluetoothException e) {
@@ -293,24 +293,14 @@ public abstract class BTActivity extends Activity implements OnBTEventListener{
 	public void paired() {
 		Log.d(TAG, "paired");
 		hideProgressDialog();
-		
-		try {
-			btHandler.connectTo(lastConnectedAddress);
-			
-			// save last successful connected address
-			PreferenceManager.getDefaultSharedPreferences(this)
-				.edit()
-				.putString("address", lastConnectedAddress)
-				.commit();
-			
-			// inform our parent
-			connectionEstablished();
-			
-		} catch (BluetoothException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	
+		// save address
+		PreferenceManager.getDefaultSharedPreferences(this)
+			.edit()
+			.putString("address", lastConnectedAddress)
+			.commit();
+	
+		connectTo(lastConnectedAddress);
 	}
 
 	@Override
