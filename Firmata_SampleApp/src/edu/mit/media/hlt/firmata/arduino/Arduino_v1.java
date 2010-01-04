@@ -67,7 +67,7 @@ public class Arduino_v1 extends Arduino {
 //					Thread.sleep(2000);
 //				} catch (InterruptedException e) {}
 //
-//				Log.d(TAG, "send report analog");
+//				//Log.d(TAG, "send report analog");
 //				for (int i = 0; i < 6; i++) {
 //					serial.write(REPORT_ANALOG_PIN | i);
 //					serial.write(1);
