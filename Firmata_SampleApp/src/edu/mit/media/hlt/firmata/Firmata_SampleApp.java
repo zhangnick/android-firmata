@@ -55,7 +55,7 @@ import edu.mit.media.hlt.firmata.bluetooth.BTActivity;
 public class Firmata_SampleApp extends BTActivity implements OnClickListener{
 	
 	private static final String TAG = "Firmata";
-	private static final int LOOP_PERIOD = 100; // 100ms (can go even faster ~ 30ms still works nicely)
+	private static final int LOOP_PERIOD = 200; // 100ms (can go even faster ~ 30ms still works nicely)
 
 	ArrayList<TextView> digitalPins;
 	ArrayList<ProgressBar> analogPins;
@@ -73,8 +73,8 @@ public class Firmata_SampleApp extends BTActivity implements OnClickListener{
         connectBtn = (Button) findViewById(R.id.connectBtn);
         // when we have already successfully established a connection before
         // the last address is restored otherwise address is null
-        if (address != null)
-        	connectBtn.setText(getString(R.string.connect, address));
+        if (lastConnectedAddress != null)
+        	connectBtn.setText(getString(R.string.connect, lastConnectedAddress));
         else
         	connectBtn.setText(R.string.menu_scan);
           
@@ -170,10 +170,10 @@ public class Firmata_SampleApp extends BTActivity implements OnClickListener{
 					}
 					disconnect();
 					resetPinStates();
-					connectBtn.setText(getString(R.string.connect, address));
+					connectBtn.setText(getString(R.string.connect, lastConnectedAddress));
 				}
 				else {
-					if (address == null){
+					if (lastConnectedAddress == null){
 						scanForDevices();
 					}
 					else {
@@ -194,7 +194,7 @@ public class Firmata_SampleApp extends BTActivity implements OnClickListener{
 	
 	private void connectToArduino() {
 		if (!connect()){
-			connectBtn.setText(getString(R.string.connect, address));
+			connectBtn.setText(getString(R.string.connect, lastConnectedAddress));
 			Toast.makeText(this, "Connection failed", Toast.LENGTH_SHORT).show();
 		}
 	}
@@ -233,9 +233,13 @@ public class Firmata_SampleApp extends BTActivity implements OnClickListener{
 				}
 			}
 			// update UI for analog pin states
+			//int tag;
 			for (ProgressBar pb : analogPins){
+				//tag = (Integer)pb.getTag();
+				//if (tag == 5) Log.d(TAG, "5: " + arduino.analogRead(5) );
 				pb.setProgress(arduino.analogRead((Integer)pb.getTag()));
 			}
+			
 		}
 	};
 	
