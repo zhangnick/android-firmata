@@ -2,8 +2,6 @@ package edu.mit.media.hlt.firmata.serial;
 
 import java.util.LinkedList;
 
-import android.util.Log;
-
 import edu.mit.media.hlt.firmata.bluetooth.OnReceivedDataListener;
 
 public abstract class Serial implements OnReceivedDataListener{
