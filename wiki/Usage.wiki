@@ -11,8 +11,8 @@ This gives you two menu items in your Activity:
   * Bluetooth on/off 
   * Scan for Devices
 
-But BTActivity does much more than that. It handles all the communication and provides you some convenient methods to connect or disconnect.
-BTActivity is abstract and you have to implement the following method:
+But *BTActivity* does much more than that. It handles all the communication and provides you some convenient methods to connect or disconnect.
+*BTActivity* is abstract and you have to implement the following method:
 
 {{{
 @Override
